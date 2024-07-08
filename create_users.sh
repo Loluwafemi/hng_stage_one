@@ -40,7 +40,7 @@ while read line
 
 		else
 			password=$RANDOM
-			useradd -m -p "$password" "$users"
+			useradd "$users"
 			groupadd $users
 			# echo "$users:$password" | chpasswd
 
