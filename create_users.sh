@@ -9,7 +9,6 @@ log=var/log/user_management.log
 chmod 600 "./$secure"
 chmod 600 "./$log"
 
-
 set -x
 
 if [ "$EUID" -ne 0 ]
@@ -115,6 +114,7 @@ if [[ -f "${1-}" ]]
 			groups=$(echo $line | cut -d';' -f 2)
 			createuser $users $groups
 		done < $1
+		exit 1
 
 	else
 		log "EXPECTED A .txt file parameter -"
@@ -123,3 +123,4 @@ if [[ -f "${1-}" ]]
 fi
 
 echo "Done processing"
+exit 0
