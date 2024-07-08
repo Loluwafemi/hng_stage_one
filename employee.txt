@@ -1,9 +1,0 @@
-kiki;kaboxer,wireshark
-jam;kaboxer,wireshark
-joe;kaboxer,wireshark
-belita;kaboxer,wireshark
-ko;kaboxer,wireshark
-chim;kaboxer,wireshark
-kimjoe;kaboxer
-dab;kaboxer
-fem;kaboxer
