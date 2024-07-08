@@ -55,7 +55,7 @@ function createuser(){
 		# set user password
 		credential="$user:$password"
 		echo $credential | chpasswd
-		# echo "Secure user: $user" | tee -a "$log"
+		log "Secure user: $user"
 		chown root:root "./$secure"
 		chown 600 "./$secure"
 		echo "$user,$password" >> $secure
