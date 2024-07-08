@@ -7,15 +7,12 @@ then
 echo "System need to run on root"
 exit 1
 fi
-cd ../var
 
-secure=secure/user_passwords.txt
-log=log/user_management.log
+mkdir -p ../var/secure
+mkdir -p ../var/log
 
-mkdir -p secure
-mkdir -p log
-
-
+secure=../var/secure/user_passwords.txt
+log=../var/log/user_management.log
 
 # set permission for user to read, write and execute to user_passwords.cvs
 chmod 600 "./$secure"
