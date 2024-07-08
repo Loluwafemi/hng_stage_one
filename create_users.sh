@@ -1,5 +1,14 @@
 #!/bin/bash
 
+mkdir -p /var/secure
+mkdir -p /var/log
+secure=/var/secure/user_passwords.txt
+log=/var/log/user_management.log
+
+# set permission for user to read, write and execute to user_passwords.cvs
+chmod 600 "$secure"
+chmod 600 "$log"
+
 set -x
 
 if [ "$EUID" -ne 0 ]
@@ -7,17 +16,6 @@ then
 echo "System need to run on root"
 exit 1
 fi
-
-mkdir -p ../var/secure
-mkdir -p ../var/log
-
-secure=../var/secure/user_passwords.txt
-log=../var/log/user_management.log
-
-# set permission for user to read, write and execute to user_passwords.cvs
-chmod 600 "./$secure"
-chmod 600 "./$log"
-
 
 set -eo pipefail
 DEBUG_MODE=${DEBUG_MODE:-false}
@@ -37,7 +35,7 @@ function log(){
 > "$secure"
 
 # giving user permission to read and write to user_passowrds.cvs
-chmod 600 "./$secure"
+chmod 600 "$secure"
 
 # create a user to home directory and secure it with password
 function createuser(){
@@ -58,10 +56,10 @@ function createuser(){
 		credential="$user:$password"
 		echo $credential | chpasswd
 		log "Secure user: $user"
-		chown root:root "./$secure"
-		chown 600 "./$secure"
+		chown root:root "$secure"
+		chown 600 "$secure"
 		echo "$user,$password" >> $secure
-		chmod 600 "./$secure"
+		chmod 600 "$secure"
 
 		log "saved and secured user: $user"
 
@@ -124,4 +122,3 @@ if [[ -f "${1-}" ]]
 fi
 
 echo "Done processing"
-exit 0
