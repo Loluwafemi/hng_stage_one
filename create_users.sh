@@ -45,7 +45,7 @@ function createuser(){
 		log "Duplicate found, user: ${user} already existed"
 
 	else
-		password=$(password)
+		password=$(gen_password)
 		# create user and put it in home dir
 		useradd -m "$user"
 
@@ -65,7 +65,7 @@ function createuser(){
 	fi
 }
 
-function password(){
+function gen_password(){
 	tr -dc 'A-Za-z0-9' </dev/urandom | head -c 12
 }
 
@@ -123,3 +123,4 @@ if [[ -f "${1-}" ]]
 fi
 
 echo "Done processing"
+echo "our password is $(gen_password)"
