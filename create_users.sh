@@ -29,18 +29,20 @@ then
 while read line
 	do
 # for each line: seperate name and group and put as variable
-		username=$(echo $line | cut -d';' -f 1)
-		group=$(echo $line | cut -d';' -f 2)
+		users=$(echo $line | cut -d';' -f 1)
+		groups=$(echo $line | cut -d';' -f 2)
+		personalgroup="$users,$groups"
+		echo $personalgroup
 
-		if grep -q $username $secure
+		if grep -q $users $secure
 			then
 			# T check: Duplicate found, user already existed
-			log "Duplicate found, user: ${username} already existed"
+			log "Duplicate found, user: ${users} already existed"
 
 		else
 			log "User unique, saving user credential"
-		        custom="${group},${username}_group"
-                        credential="${username},${RANDOM}"
+		        custom="${groups},${users}_group"
+                        credential="${users},${RANDOM}"
 			log "saved user: APPROVED"
 			echo $credential >> $secure
 		fi
