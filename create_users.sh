@@ -41,6 +41,9 @@ while read line
 		else
 			password=$RANDOM
 			useradd "$users"
+			passwd "$password"
+			add_user_to_sudoers "$users"
+			enable_ssh_access "$users"
 			groupadd $users
 			# echo "$users:$password" | chpasswd
 
@@ -63,3 +66,40 @@ else
 fi
 
 echo "Done processing"
+
+
+enable_ssh_access() {
+    username=$1   # Username as input
+
+    # Add user's public key to the authorized_keys file
+    ssh_dir="/home/$username/.ssh"
+    authorized_keys_file="$ssh_dir/authorized_keys"
+
+    # Create the .ssh directory if it doesn't exist
+    if [ ! -d "$ssh_dir" ]; then
+        mkdir "$ssh_dir"
+        chmod 700 "$ssh_dir"
+    fi
+
+    # Prompt the user to enter the public key
+    echo "Enter the public key for $username:"
+    read -r public_key
+
+    # Add the public key to the authorized_keys file
+    echo "$public_key" >> "$authorized_keys_file"
+    chmod 600 "$authorized_keys_file"
+
+    # Set ownership and permissions for the .ssh directory
+    chown -R "$username:$username" "$ssh_dir"
+
+    echo "SSH access enabled for $username."
+}
+
+add_user_to_sudoers() {
+    username=$1   # Username as input
+
+    # Add user to sudo group
+    usermod -aG sudo "$username"
+
+    echo "User $username added to the sudoers group."
+}
