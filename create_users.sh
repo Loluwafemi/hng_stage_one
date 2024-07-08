@@ -52,9 +52,12 @@ function createuser(){
 		# set user password
 		credential="$user:$password"
 		echo $credential | chpasswd
-		echo "our credewn $credential"
+		echo "Secure user: $user" | tee -a "$log"
 		echo "$user,$password" >> $secure
-		log "saved user: $user"
+		chown root:root "$secure"
+		chown 600 "$secure"
+
+		log "saved and secured user: $user"
 
 		log "User unique, saving user credential"
 		log "Adding user to groups"
