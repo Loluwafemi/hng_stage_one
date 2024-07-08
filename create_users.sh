@@ -7,6 +7,8 @@ log=var/log/user_management.log
 
 # set permission for user to read, write and execute to user_passwords.cvs
 chmod 600 "./$secure"
+chmod 600 "./$log"
+
 
 set -x
 
@@ -35,6 +37,7 @@ function log(){
 
 # giving user permission to read and write to user_passowrds.cvs
 chmod 600 "./$secure"
+
 # create a user to home directory and secure it with password
 function createuser(){
 	local user=$1
@@ -53,10 +56,10 @@ function createuser(){
 		credential="$user:$password"
 		echo $credential | chpasswd
 		# echo "Secure user: $user" | tee -a "$log"
-		chown root:root "$secure"
-		chown 600 "$secure"
+		chown root:root "./$secure"
+		chown 600 "./$secure"
 		echo "$user,$password" >> $secure
-		chmod 600 "$secure"
+		chmod 600 "./$secure"
 
 		log "saved and secured user: $user"
 
