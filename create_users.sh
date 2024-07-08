@@ -6,7 +6,7 @@ secure=var/secure/user_passwords.csv
 log=var/log/user_management.log
 
 # set permission for user to read, write and execute to user_passwords.cvs
-chmod 700 $secure	
+chmod 700 "./$secure"
 
 set -x
 
@@ -34,12 +34,12 @@ function log(){
 > "$secure"
 
 # giving user permission to read and write to user_passowrds.cvs
-chmod 600 "$secure"
+chmod 600 "./$secure"
 # create a user to home directory and secure it with password
 function createuser(){
 	local user=$1
 	local groups=$2
-	if grep -R "$user" $secure
+	if id "$user" &>/dev/null
 		then
 		# T check: Duplicate found, user already existed
 		log "Duplicate found, user: ${user} already existed"
@@ -50,13 +50,15 @@ function createuser(){
 		useradd -m "$user"
 
 		# set user password
-		echo "$user:$password" | chpasswd
+		credential="$user:$password"
+		echo $credential | chpasswd
+		echo "our credewn $credential"
+		echo "$user,$password" >> $secure
+		log "saved user: $user"
 
 		log "User unique, saving user credential"
 		log "Adding user to groups"
 		creategroup $user $groups
-		log "saved user: APPROVED"
-		echo $credential >> $secure
 	fi
 }
 
@@ -64,14 +66,14 @@ function createuser(){
 function creategroup(){
 	local user=$1
 	local groups=$2
-	for group in "${groups[@]}"
+	for group in $(groups | cut -d ',')
 	do 
 	group=$(echo "$group" | xargs)
 	if ! getent group "$group" &>/dev/null
 	then
 	groupadd "$group"
 	log "creating group $group"
-	
+
 	echo "Created group $group."
 	fi
 
@@ -84,7 +86,7 @@ function creategroup(){
 	else
 	log "User: $user added to group: $group"
 	fi
-	
+	done
 }
 
 # check if the input is a file: else send a msg
@@ -99,7 +101,7 @@ if [[ -f "${1-}" ]]
 	# for each line: seperate name and group and put as variable
 			users=$(echo $line | cut -d';' -f 1)
 			groups=$(echo $line | cut -d';' -f 2)
-			createuser $user 
+			createuser $users $groups
 		done < $1
 
 	else
