@@ -46,6 +46,7 @@ function createuser(){
 		then
 		# T check: Duplicate found, user already existed
 		log "Duplicate found, user: ${user} already existed"
+		creategroup $user $groups
 
 	else
 		password=$RANDOM
@@ -68,11 +69,6 @@ function createuser(){
 		creategroup $user $groups
 	fi
 }
-
-# function gen_password(){
-# 	tr -dc 'A-Za-z0-9' </dev/urandom | head -c 12
-# }
-
 
 # add user to groups and assign a custom group
 function creategroup(){
