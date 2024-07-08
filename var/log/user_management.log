@@ -1,0 +1,46 @@
+[07/08/24-00:14:59] > Checking dependencies .txt
+[07/08/24-00:15:00] > Duplicate found, user: kiki already existed
+[07/08/24-00:15:00] > Duplicate found, user: jam already existed
+[07/08/24-00:15:02] > saved user: joe
+[07/08/24-00:15:02] > User unique, saving user credential
+[07/08/24-00:15:02] > Adding user to groups
+[07/08/24-00:15:02] > Group: kaboxer already existed
+[07/08/24-00:15:03] > User: joe added to group: kaboxer
+[07/08/24-00:15:03] > Group: wireshark already existed
+[07/08/24-00:15:03] > User: joe added to group: wireshark
+[07/08/24-00:15:05] > saved user: belita
+[07/08/24-00:15:05] > User unique, saving user credential
+[07/08/24-00:15:05] > Adding user to groups
+[07/08/24-00:15:05] > Group: kaboxer already existed
+[07/08/24-00:15:06] > User: belita added to group: kaboxer
+[07/08/24-00:15:06] > Group: wireshark already existed
+[07/08/24-00:15:07] > User: belita added to group: wireshark
+[07/08/24-00:15:09] > saved user: ko
+[07/08/24-00:15:09] > User unique, saving user credential
+[07/08/24-00:15:09] > Adding user to groups
+[07/08/24-00:15:10] > Group: kaboxer already existed
+[07/08/24-00:15:11] > User: ko added to group: kaboxer
+[07/08/24-00:15:11] > Group: wireshark already existed
+[07/08/24-00:15:12] > User: ko added to group: wireshark
+[07/08/24-00:15:16] > saved user: chim
+[07/08/24-00:15:16] > User unique, saving user credential
+[07/08/24-00:15:16] > Adding user to groups
+[07/08/24-00:15:16] > Group: kaboxer already existed
+[07/08/24-00:15:17] > User: chim added to group: kaboxer
+[07/08/24-00:15:18] > Group: wireshark already existed
+[07/08/24-00:15:19] > User: chim added to group: wireshark
+[07/08/24-00:15:23] > saved user: kimjoe
+[07/08/24-00:15:23] > User unique, saving user credential
+[07/08/24-00:15:23] > Adding user to groups
+[07/08/24-00:15:24] > Group: kaboxer already existed
+[07/08/24-00:15:26] > User: kimjoe added to group: kaboxer
+[07/08/24-00:15:31] > saved user: dab
+[07/08/24-00:15:31] > User unique, saving user credential
+[07/08/24-00:15:31] > Adding user to groups
+[07/08/24-00:15:32] > Group: kaboxer already existed
+[07/08/24-00:15:33] > User: dab added to group: kaboxer
+[07/08/24-00:15:38] > saved user: fem
+[07/08/24-00:15:38] > User unique, saving user credential
+[07/08/24-00:15:38] > Adding user to groups
+[07/08/24-00:15:39] > Group: kaboxer already existed
+[07/08/24-00:15:40] > User: fem added to group: kaboxer

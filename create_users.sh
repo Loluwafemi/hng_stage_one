@@ -66,18 +66,22 @@ function createuser(){
 function creategroup(){
 	local user=$1
 	local groups=$2
-	for group in $(groups | cut -d ',')
+	array_group=${groups//,/ }
+	echo "Groups are $groups"
+	for group in $array_group
 	do 
-	group=$(echo "$group" | xargs)
 	if ! getent group "$group" &>/dev/null
 	then
 	groupadd "$group"
 	log "creating group $group"
 
 	echo "Created group $group."
+	else
+	echo "Group: $group already existed"
+	log "Group: $group already existed"
 	fi
 
-	usermod -a6 "$group" "$user"
+	usermod -a -G "$group" "$user"
 
 	if [ $? -ne 0 ]
 	then
