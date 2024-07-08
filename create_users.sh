@@ -45,7 +45,7 @@ function createuser(){
 		log "Duplicate found, user: ${user} already existed"
 
 	else
-		password=$RANDOM
+		password=$(password)
 		# create user and put it in home dir
 		useradd -m "$user"
 
@@ -64,6 +64,11 @@ function createuser(){
 		creategroup $user $groups
 	fi
 }
+
+function password(){
+	tr -dc 'A-Za-z0-9' </dev/urandom | head -c 12
+}
+
 
 # add user to groups and assign a custom group
 function creategroup(){
