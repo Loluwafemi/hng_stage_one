@@ -122,3 +122,4 @@ if [[ -f "${1-}" ]]
 fi
 
 echo "Done processing"
+exit 0
