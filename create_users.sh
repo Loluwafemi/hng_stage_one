@@ -5,6 +5,7 @@ mkdir -p var/log
 secure=var/secure/user_passwords.csv
 log=var/log/user_management.log
 
+
 set -eo pipefail
 DEBUG_MODE=${DEBUG_MODE:-false}
 ALL_LOG_FILE=$log
@@ -31,18 +32,22 @@ while read line
 # for each line: seperate name and group and put as variable
 		users=$(echo $line | cut -d';' -f 1)
 		groups=$(echo $line | cut -d';' -f 2)
-		personalgroup="$users,$groups"
-		echo $personalgroup
 
-		if grep -q $users $secure
+		if grep -R "$users" $secure
 			then
 			# T check: Duplicate found, user already existed
 			log "Duplicate found, user: ${users} already existed"
 
 		else
+			password=$RANDOM
+			useradd -m -p "$password" "$users"
+			groupadd $users
+			# echo "$users:$password" | chpasswd
+
+
 			log "User unique, saving user credential"
 		        custom="${groups},${users}_group"
-                        credential="${users},${RANDOM}"
+                        credential="${users},${password}"
 			log "saved user: APPROVED"
 			echo $credential >> $secure
 		fi
