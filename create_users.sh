@@ -2,6 +2,7 @@
 
 mkdir -p var/secure
 mkdir -p var/log
+
 secure=var/secure/user_passwords.txt
 log=var/log/user_management.log
 
@@ -120,6 +121,8 @@ if [[ -f "${1-}" ]]
 		echo 'EXPECTED A .txt file paramater -'
 
 fi
+flock $log -c "secured file"
+flock $secure -c "secured file"
 
 echo "Done processing"
 exit 0
