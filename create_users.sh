@@ -2,11 +2,11 @@
 
 mkdir -p var/secure
 mkdir -p var/log
-secure=var/secure/user_passwords.csv
+secure=var/secure/user_passwords.txt
 log=var/log/user_management.log
 
 # set permission for user to read, write and execute to user_passwords.cvs
-chmod 700 "./$secure"
+chmod 600 "./$secure"
 
 set -x
 
@@ -52,10 +52,11 @@ function createuser(){
 		# set user password
 		credential="$user:$password"
 		echo $credential | chpasswd
-		echo "Secure user: $user" | tee -a "$log"
-		echo "$user,$password" >> $secure
+		# echo "Secure user: $user" | tee -a "$log"
 		chown root:root "$secure"
 		chown 600 "$secure"
+		echo "$user,$password" >> $secure
+		chmod 600 "$secure"
 
 		log "saved and secured user: $user"
 
