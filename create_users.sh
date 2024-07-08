@@ -121,8 +121,7 @@ if [[ -f "${1-}" ]]
 		echo 'EXPECTED A .txt file paramater -'
 
 fi
-flock $log -c "secured file"
-flock $secure -c "secured file"
 
 echo "Done processing"
 exit 0
+
